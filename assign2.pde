@@ -147,6 +147,8 @@ void setup() {
      if (c <= 0) {
          c = 0;
         isPlaying =false;
+        fx = 500;
+        fy = 240;
         changeStart = true; 
      
    }
