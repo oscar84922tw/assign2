@@ -2,6 +2,7 @@ PImage bg1,bg2,treasure,hp,fighter,enemy,end1,end2,start1,start2,enemy1,bomb;//i
 int x = 0;
 int y = 0;
 int z = -640;
+int more = 5;
 int c = 38;
 int t = floor(random(600));
 int s = floor(random(480));
@@ -30,6 +31,7 @@ boolean changeStart = false;
 float fytmp = 0;
 int eyPro = 0;
 int exPro = 0;
+boolean changeTmp = false;
 void setup() {
   size(641, 482);
   bg1 = loadImage("img/bg1.png");
@@ -50,8 +52,18 @@ void setup() {
 }
 
  void mousePressed(){
- tmp2 = !tmp2;  
- 
+ if(!changeTmp){
+   if(mouseX > 200 && mouseX <= 430){
+   if(mouseY > 380 && mouseY < 420 ){
+   changeTmp = true;
+     tmp2 = !tmp2;  
+   }
+ }}else if(changeTmp){
+   if(mouseX > 200 && mouseX <= 430){
+   if(mouseY > 300 && mouseY < 340 ){
+   tmp2 = !tmp2;  
+   changeTmp = false;}
+ }}
  }
  
  void draw() {
@@ -87,7 +99,11 @@ void setup() {
       bg2x+=2;//bg2 Xspeed
       bg1x%=1280;// if bg1 to 1280,it will go back 0;
       bg2x%=1280;// like bg2;
-      ex+=2;//enemy speed
+      if(count%1200000==0){
+        more+=1;
+      }
+      
+      ex+=more;//enemy speed
       ex%= 640; //enemy location
 
      image(enemy,ex,ey);
@@ -141,7 +157,7 @@ void setup() {
            t=floor(random(600));
            changeTreasurePlace=false;
          }
-         c+=38;
+         c+=19;
        }
      }
      if (c <= 0) {
